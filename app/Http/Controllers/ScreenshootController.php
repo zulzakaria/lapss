@@ -157,6 +157,8 @@ class ScreenshootController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ss = Screenshoot::findOrFail($id);
+        $ss->delete();
+        return redirect()->route('screenshoot.view');
     }
 }

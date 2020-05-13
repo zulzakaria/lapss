@@ -59,9 +59,13 @@
                         <td>{{$detail->tanggal}}</td>
                     <td><img src="{{asset('/ss/'.$detail->file)}}" alt="{{$detail->file}}" width="150px"></td>
                         <td>
-                        <button type="button" class="btn btn-primary btn-flat btn-sm"><i class="fas fa-address-card"></i></button>
-                        <a href="{{route('screenshoot.edit',['screenshoot'=>$detail->id])}}" class="btn btn-warning btn-flat btn-sm"><i class="fas fa-user-edit"></i></a>
-                        <button type="button" class="btn btn-danger btn-flat btn-sm"><i class="fas fa-user-times"></i></button>
+                          <form onsubmit="return confirm('Yakin menghapus data?')" class="d-inline"
+                          action="{{route('screenshoot.destroy', [$detail->id])}}" method="POST">
+                          @csrf
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button class="btn btn-sm btn-danger" type="submit">HAPUS</button>
+                          <!-- <input type="submit" value="Delete" class="btn btn-danger btn-sm"> -->
+                      </form>
                         </td>
                     </tr>
                 @endforeach

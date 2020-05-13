@@ -52,7 +52,7 @@
       @foreach ($data as $detail)
          
           {{-- {{$detail->teacher->nama}}     --}}
-          <img src="{{asset('/ss/'.$detail->file)}}" alt="{{$detail->file}}" width="350px" style="border:2px solid black">&nbsp;&nbsp;&nbsp;
+          <img src="{{asset('/ss/'.$detail->file)}}" alt="{{$detail->file}}" width="320px" height="430px" style="border:2px solid black">&nbsp;&nbsp;&nbsp;
               
           
       @endforeach
