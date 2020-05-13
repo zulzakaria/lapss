@@ -14,14 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('screenshoot.index');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::resource('teachers','TeachersController');
-Route::post('teachersImport','TeachersController@import')->name('teachers.import');
-
 Route::resource('screenshoot','ScreenshootController');
+
+
+Route::resource('teachers','TeachersController')->middleware('auth');
+Route::post('teachersImport','TeachersController@import')->name('teachers.import')->middleware('auth');
+Route::get('view','ScreenshootController@view')->name('screenshoot.view')->middleware('auth');
+Route::get('viewpdf/{status}/{date}','ScreenshootController@viewpdf')->name('screenshoot.viewpdf')->middleware('auth');
+Route::post('viewtanggal','ScreenshootController@viewtanggal')->name('screenshoot.viewtanggal')->middleware('auth');

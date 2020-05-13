@@ -1,9 +1,5 @@
 <footer class="main-footer">
-    Copyright &copy; 2020 - <strong>@zulzakaria</strong> - Theme by <a href="http://adminlte.io">AdminLTE.io</a>.
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.2
-    </div>
+    Copyright <b>&copy; SMKN 1 Limboto 2020</b> - code written by zulzakaria@smkn1limboto.sch.id
   </footer>
 
   <!-- Control Sidebar -->

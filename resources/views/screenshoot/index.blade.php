@@ -75,6 +75,7 @@
                         <option value="{{$g->id}}">{{$g->id}} - {{$g->nama}}</option>
                     @endforeach
                   </select>
+                  <code>Pilih nama anda pada dropdown.</code>
                 </div>
                 <div class="form-group">
                     <label>Tanggal Postingan Facebook :</label>
@@ -82,21 +83,22 @@
                         $skrg = date("Y-m-d");
                     @endphp
                     <input class="form-control col-md-6" type="date" name="tanggal" value="{{$skrg}}" readonly>
+                    <code>Tanggal otomatis, tidak dapat diubah.</code>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Screenshoot Facebook</label>
                     <div class="input-group">
                         <div class="custom-file col-md-8">
-                        <input type="file" class="form-control" id="exampleInputFile" name="file" accept="image/png, image/jpeg">
+                        <input type="file" class="form-control-file" id="exampleInputFile" name="file" accept="image/png, image/jpeg" required>
                         </div>
                         
                     </div>
-                    <code><i>WAJIB di-crop sebelum di upload</i></code>
+                    <code>WAJIB di-crop sebelum di upload</code>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Key Upload</label>
                     <input class="form-control col-md-6" type="text" name="kunci" required>
-                    <code><i>Nomor urut absen anda (tertulis sebelum nama)</i></code>
+                    <code>Nomor urut absen anda (tertulis sebelum nama)</code>
                 </div>
                 <div class="form-group">
                     <input class="btn btn-success col-md-6" type="submit" value="Upload Data">

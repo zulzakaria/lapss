@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Teacher;
 use App\Screenshoot;
+use PDF;
 
 class ScreenshootController extends Controller
 {
@@ -69,6 +70,62 @@ class ScreenshootController extends Controller
         //
     }
 
+    public function view()
+    {
+        $now = date('Y-m-d');
+        // $data = Screenshoot::all()->sortBy('teacher_id');
+        $data = Screenshoot::where('tanggal',$now)
+                            ->orderBy('teacher_id','asc')
+                            ->get();
+        $count = $data->count();
+        return view('screenshoot.view',['data' => $data,'tanggal'=>$now,'count' => $count]);
+    }
+
+    public function viewtanggal(Request $request)
+    {
+        $data = Screenshoot::where('tanggal',$request->tanggal)
+                            ->orderBy('teacher_id','asc')
+                            ->get();
+        $count = $data->count();
+        return view('screenshoot.view',['data' => $data,'tanggal'=>$request->tanggal,'count' => $count]);
+    }
+
+    public function viewpdf($status, $date)
+    {
+        if($status==1){
+            $data = Screenshoot::where('tanggal',$date)
+                                ->leftJoin('teachers', function($join){
+                                    $join->on('screenshoots.teacher_id','=','teachers.id');
+                                })
+                                ->where('teachers.status','=','PNS')
+                                ->get();
+        }elseif ($status==2) {
+            $data = Screenshoot::where('tanggal',$date)
+                                ->leftJoin('teachers', function($join){
+                                    $join->on('screenshoots.teacher_id','=','teachers.id');
+                                })
+                                ->where('teachers.status','=','GTT')
+                                ->get();
+        }elseif ($status==3) {
+            $data = Screenshoot::where('tanggal',$date)
+                                ->leftJoin('teachers', function($join){
+                                    $join->on('screenshoots.teacher_id','=','teachers.id');
+                                })
+                                ->where(function ($query) {
+                                    $query->where('teachers.status','=','PTT')
+                                            ->orwhere('teachers.status','=','CS')
+                                            ->orwhere('teachers.status','=','TKS');
+                                        })                                
+                                ->get();
+        }else{
+            $data = Screenshoot::where('tanggal',$date)
+                            ->get();
+        }
+        
+        // $pdf = PDF::loadview('screenshoot.viewpdf',['data'=>$data,'tanggal'=>$date]);
+        // return $pdf->download('Dokumentasi_'.$date.'.pdf');
+        return view('screenshoot.viewpdf',['data' => $data,'tanggal'=>$date]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
